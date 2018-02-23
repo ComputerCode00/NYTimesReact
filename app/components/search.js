@@ -1,10 +1,10 @@
 var React = require('react');
 var Router = require('react-router');
 
-var Query = require('./Search/Query');
-var Results = require('./Search/Results');
+var Query = require('./search/Query');
+var Results = require('./search/results');
 
-var helpers = require('../utils/helpers');
+// var helpers = require('../utils/helpers');
 
 var Search = React.createClass({
 	getInitialState: function(){

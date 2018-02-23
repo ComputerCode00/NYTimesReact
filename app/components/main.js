@@ -1,5 +1,5 @@
 var React = require('react');
-var Search = require('./Search.js');
+var Search = require('./search.js');
 
 var Main = React.createClass({
 	render: function(){
@@ -17,4 +17,4 @@ var Main = React.createClass({
 	}
 });
 
-module.exports = Main;
+module.exports = main;

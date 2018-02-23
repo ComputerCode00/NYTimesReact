@@ -1,23 +1,69 @@
-const express = require("express");
-const path = require("path");
-const bodyParser = require("body-parser");
-const app = express();
-const apiRoutes = require("./routes/apiRoutes");
+var express = require('express');
+var bodyParser = require('body-parser');
+var logger = require('morgan');
+var mongoose = require('mongoose');
 
-const PORT = process.env.PORT || 3050;
+var app = express();
 
-app.use(express.static("client/build"));
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(logger('dev'));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
+app.use(express.static('public'));
 
-app.use(bodyParser.json());
+var PORT = process.env.PORT || 3000; 
 
-app.use("/api", apiRoutes);
 
-app.get("*", function(req, res) {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+// if (process.env.MONGODB_URI) {
+//   mongoose.connect(process.env.MONGODB_URI);
+// },
+// else {
+//   mongoose.connect('mongodb://localhost/nytimes');
+// };
+
+var db = mongoose.connection;
+
+db.on('error', function(err) {
+  console.log('Mongoose Error: ', err);
+});
+db.once('open', function() {
+  console.log('Mongoose connection...');
+});
+
+var Article = require('./article.js');
+
+app.post('/submit', function(req, res) {
+
+  var content = new Article(req.body);
+ 
+  content.save(req.body, function(err, saved) {
+    if (err) {
+      console.log('error saving to mongo ',err);
+    } else {
+      console.log('saved data',saved);
+      res.send(saved);
+    }
+  });
+
+});
+
+app.get('/all', function(req, res) {
+ 
+  Article.find({}, function(err, found) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(found);
+    }
+  });
+});
+
+
+app.get('/', function(req, res) {
+  res.send(index.html);
 });
 
 app.listen(PORT, function() {
-  console.log(`Site ==> Server now on port ${PORT}!`);
+  console.log('App running on',PORT);
 });

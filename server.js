@@ -31,22 +31,22 @@ db.once('open', function() {
   console.log('Mongoose connection...');
 });
 
-var Article = require('./article.js');
+// var Article = require('./article.js');
 
-app.post('/submit', function(req, res) {
+// app.post('/submit', function(req, res) {
 
-  var content = new Article(req.body);
+//   var content = new Article(req.body);
  
-  content.save(req.body, function(err, saved) {
-    if (err) {
-      console.log('error saving to mongo ',err);
-    } else {
-      console.log('saved data',saved);
-      res.send(saved);
-    }
-  });
+//   content.save(req.body, function(err, saved) {
+//     if (err) {
+//       console.log('error saving to mongo ',err);
+//     } else {
+//       console.log('saved data',saved);
+//       res.send(saved);
+//     }
+//   });
 
-});
+// });
 
 app.get('/all', function(req, res) {
  

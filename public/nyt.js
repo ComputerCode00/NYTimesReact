@@ -1,5 +1,5 @@
 
-// var authKey = "b9f91d369ff59547cd47b931d8cbc56b:0:74623931";
+var authKey = "67642baddafe449086ed8d6b728b7459";
 
 var searchTerm = "";
 var numResults = 0;
@@ -7,7 +7,7 @@ var startYear = 0;
 var endYear = 0;
 
 var queryURLBase = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" +
-  authKey + "&q=";
+  authKey + "67642baddafe449086ed8d6b728b7459";
 
 var articleCounter = 0;
 
